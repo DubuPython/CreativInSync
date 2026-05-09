@@ -174,17 +174,32 @@ const attModal = document.getElementById('attendance-modal');
 const photoInput = document.getElementById('attendance-photo');
 const photoPreview = document.getElementById('photo-preview');
 
+// --- IMPROVED MODAL BINDING (Event Delegation) ---
 document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.btn-attendance');
-    if (btn) {
-        e.preventDefault();
-        const acc = document.getElementById('account-link').innerText;
-        if (!acc.includes('Welcome')) return showAlert('Please login first!', 'error');
+    // 1. Officer/Member Card Click
+    const memberCard = e.target.closest('.member-card');
+    if (memberCard && !isEditMode) {
+        const img = memberCard.querySelector('img')?.src || '';
+        const name = memberCard.querySelector('h3')?.innerText || '';
+        const role = memberCard.querySelector('p')?.innerText || '';
+        const desc = memberCard.querySelector('.admin-hidden-desc')?.innerText || 'No description.';
 
-        document.getElementById('event-name').innerText = btn.getAttribute('data-event');
-        attModal.style.display = 'flex';
-        // The visibility fix
-        setTimeout(() => attModal.classList.add('active'), 10);
+        document.getElementById('modal-img').src = img;
+        document.getElementById('modal-name').innerText = name;
+        document.getElementById('modal-role').innerText = role;
+        document.getElementById('modal-desc').innerText = desc;
+        document.getElementById('member-modal').classList.add('active');
+    }
+
+    // 2. Event Card Click (excluding attendance button)
+    const eventCard = e.target.closest('.card');
+    if (eventCard && !e.target.closest('.btn-attendance') && !isEditMode) {
+        const title = eventCard.querySelector('h3')?.innerText || '';
+        const desc = eventCard.querySelector('.admin-hidden-desc')?.innerText || '';
+        
+        document.getElementById('event-modal-title').innerText = title;
+        document.getElementById('event-modal-desc').innerText = desc;
+        document.getElementById('event-modal').classList.add('active');
     }
 });
 
