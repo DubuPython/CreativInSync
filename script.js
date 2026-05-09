@@ -8,7 +8,7 @@ function safeAddEvent(el, evt, fn) {
     el.addEventListener(evt, fn);
 }
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://creativinsync.onrender.com';
 let siteData = {}; 
 let isEditMode = false;
 
