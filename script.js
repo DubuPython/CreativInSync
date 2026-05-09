@@ -11,7 +11,7 @@ function safeAddEvent(el, evt, fn) {
 const API_BASE = 'https://creativinsync.onrender.com';
 let siteData = {}; 
 let isEditMode = false;
-
+    
 // Custom Alert (Replaces ugly browser alerts)
 function showAlert(msg, type = 'info') {
     const alertBox = document.getElementById('custom-alert');
