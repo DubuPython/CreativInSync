@@ -28,11 +28,11 @@ mongo = PyMongo(app)
 origins = [o.strip() for o in app.config.get('FRONTEND_ORIGINS', '').split(',') if o.strip()]
 if not origins:
       origins = ["http://localhost:5500"]
-CORS(
-    app,
-    resources={r"/api/*": {"origins": origins}},
-    supports_credentials=True
-)
+      
+CORS(app, resources={r"/api/*": {"origins": [
+    "https://creativ-in-sync-main-dubupythons-projects.vercel.app",
+    "https://creativ-in-sync-g648pbqic-dubupythons-projects.vercel.app"
+]}}, supports_credentials=True)
 
 # Import and register blueprints
 from routes.auth import auth_bp
