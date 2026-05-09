@@ -1,0 +1,435 @@
+/* --- Base Styles & Variables --- */
+:root {
+    --primary: #0044cc; /* Vibrant Royal Blue */
+    --primary-dark: #002266;
+    --secondary: #e6f0ff; /* Soft icy blue */
+    --white: #ffffff;
+    --text-main: #2d3748;
+    --text-muted: #718096;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--white);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+html { scroll-behavior: smooth; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+/* Utility Classes */
+.bg-light { background-color: #f8fafc; }
+.text-center { text-align: center; }
+.mt-2 { margin-top: 3rem; }
+
+/* --- Buttons --- */
+.btn-primary {
+    display: inline-block; background: var(--primary); color: var(--white);
+    padding: 1rem 2.5rem; text-decoration: none; border-radius: 50px;
+    font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; border: 2px solid var(--primary);
+}
+.btn-primary:hover { background: transparent; color: var(--primary); }
+
+.btn-join {
+    background: linear-gradient(135deg, var(--primary), #0066ff); color: var(--white);
+    padding: 0.6rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-join:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 68, 204, 0.2); }
+
+.btn-secondary {
+    display: inline-block; background: transparent; color: var(--primary);
+    padding: 0.8rem 2.5rem; text-decoration: none; border-radius: 50px; cursor: pointer;
+    font-weight: 600; font-size: 1rem; transition: all 0.3s ease; border: 2px solid var(--primary);
+}
+.btn-secondary:hover { background: var(--primary); color: var(--white); box-shadow: 0 10px 20px rgba(0, 68, 204, 0.2); transform: translateY(-3px); }
+
+/* --- Glassmorphism Navigation --- */
+.navbar { position: fixed; top: 0; width: 100%; z-index: 1000; background: transparent; transition: all 0.4s ease; }
+.navbar.scrolled { background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); }
+.nav-container { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; transition: padding 0.4s ease; }
+.navbar.scrolled .nav-container { padding: 0.8rem 5%; }
+
+#brand-logo { text-decoration: none; color: var(--primary); font-size: 1.4rem; font-weight: 800; cursor: pointer; transition: font-size 0.3s ease; }
+.logo-text { display: inline-block; white-space: nowrap; transition: opacity 0.3s ease, color 0.3s ease; }
+.navbar.logo-expanded #brand-logo { font-size: 1.2rem; }
+.navbar.logo-expanded .logo-text { color: var(--primary-dark); }
+
+.nav-menu { display: flex; list-style: none; align-items: center; gap: 2rem; transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; }
+.navbar.logo-expanded .nav-menu { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+.nav-link { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 1rem; position: relative; transition: color 0.3s ease; }
+.nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--primary); transition: width 0.3s ease; }
+.nav-link:hover { color: var(--primary); }
+.nav-link:hover::after { width: 100%; }
+
+.hamburger { display: none; cursor: pointer; z-index: 1001; }
+.bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--primary-dark); }
+
+/* --- Hero Section & Logo Spin --- */
+.hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; background-color: var(--secondary); overflow: hidden; text-align: center; }
+.hero-content { position: relative; z-index: 10; max-width: 800px; padding: 0 20px; }
+
+.hero-logo-wrapper { display: flex; justify-content: center; margin-bottom: 2rem; perspective: 1000px; position: relative; }
+.hero-logo { width: 700px; height: auto; border-radius: 50%; animation: floatAndGlow 4s ease-in-out infinite; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease; }
+.hero-logo:hover { transform: scale(1.05) rotate(2deg); cursor: pointer; }
+.hero-logo.exploded { transform: scale(0) !important; opacity: 0; animation: none; pointer-events: none; }
+
+.explosion-container { position: absolute; top: 50%; left: 50%; width: 0; height: 0; pointer-events: none; z-index: 20; }
+.scatter-word { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); opacity: 0; font-weight: 800; font-size: 0.9rem; white-space: nowrap; text-shadow: 0 4px 15px rgba(255, 255, 255, 0.8); }
+.explosion-container.active .scatter-word { opacity: 1; }
+
+@keyframes floatAndGlow {
+    0% { filter: drop-shadow(0 0 15px rgba(0, 68, 204, 0.4)); }
+    50% { filter: drop-shadow(0 0 35px rgba(0, 170, 255, 0.8)); }
+    100% { filter: drop-shadow(0 0 15px rgba(0, 68, 204, 0.4)); }
+}
+
+.hero h1 { font-size: 4rem; line-height: 1.2; color: var(--primary-dark); margin-bottom: 1.5rem; }
+.highlight { color: var(--primary); }
+.hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2.5rem; }
+
+.shape { position: absolute; border-radius: 50%; filter: blur(60px); z-index: 1; opacity: 0.6; }
+.shape-1 { width: 400px; height: 400px; background: #4d94ff; top: -100px; right: -100px; animation: float 8s ease-in-out infinite; }
+.shape-2 { width: 300px; height: 300px; background: #b3d1ff; bottom: -50px; left: -100px; animation: float 6s ease-in-out infinite reverse; }
+@keyframes float { 0% { transform: translateY(0px) scale(1); } 50% { transform: translateY(30px) scale(1.05); } 100% { transform: translateY(0px) scale(1); } }
+
+/* --- Sections General --- */
+section { padding: 6rem 0; }
+.section-title { text-align: center; margin-bottom: 4rem; }
+.section-title h2 { font-size: 2.5rem; color: var(--primary-dark); margin-bottom: 0.5rem; }
+.underline { height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
+
+/* --- About Section & Stats --- */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.about-text p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; }
+.about-stats { display: flex; gap: 1.5rem; }
+.stat-box { background: var(--white); padding: 2.5rem; border-radius: 20px; text-align: center; flex: 1; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s ease; }
+.stat-box:hover { transform: translateY(-10px); }
+.stat-box h3 { color: var(--primary); font-size: 3rem; margin-bottom: 0.5rem; }
+.stat-box p { font-weight: 600; color: var(--text-muted); }
+
+/* --- Achievements Sub-section --- */
+.achievements-wrapper { margin-top: 5rem; text-align: center; }
+.sub-title { color: var(--primary-dark); font-size: 1.8rem; margin-bottom: 2.5rem; font-weight: 800; }
+.achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; text-align: left;}
+
+.achievement-card { background: var(--secondary); padding: 1.5rem; border-radius: 20px; transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; border: 1px solid rgba(0, 68, 204, 0.05); overflow: hidden; }
+.achievement-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0, 68, 204, 0.1); background: var(--white); }
+
+.achievement-img-wrapper { overflow: hidden; border-radius: 15px; margin-bottom: 1.5rem; }
+.achievement-img { width: 100%; height: 160px; object-fit: cover; border-radius: 15px; transition: transform 0.4s ease; display: block; }
+.achievement-card:hover .achievement-img { transform: scale(1.1); }
+
+.achievement-card h4 { color: var(--primary); font-size: 1.3rem; margin-bottom: 0.8rem; }
+.achievement-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+/* --- Team / Flowchart Section --- */
+.advisers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; justify-items: center; margin-top: 2.5rem; }
+.adviser-card { width: 100%; max-width: 520px; padding: 2.5rem; }
+.adviser-card img { width: 160px; height: 160px; }
+.adviser-card h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.adviser-card p { font-size: 1rem; }
+
+.org-chart { display: grid; gap: 2rem; margin-top: 2rem; }
+.org-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; position: relative; }
+.org-row.top-row, .org-row.middle-row { justify-content: center; }
+.org-row.department-row { display: grid; grid-template-columns: repeat(4, minmax(240px, 1fr)); gap: 2rem; align-items: start; }
+.org-column { background: var(--secondary); border-radius: 20px; padding: 1.5rem; box-shadow: 0 12px 30px rgba(0,0,0,0.05); min-width: 240px; width: 100%; }
+
+.org-column .column-title { font-size: 1.1rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 1rem; text-align: center; }
+.member-card { background: var(--white); padding: 1.5rem; border-radius: 18px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; width: 100%; }
+.member-card.leader-card { max-width: 320px; }
+.member-card.head-card { max-width: 280px; margin: 0 auto 1rem; }
+.member-card.team-card { max-width: 260px; margin: 0 auto 1rem; }
+.member-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 68, 204, 0.15); }
+.member-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid var(--secondary); }
+.member-card.team-card img { width: 100px; height: 100px; }
+.member-card h3 { color: var(--primary-dark); font-size: 1.2rem; margin-bottom: 0.2rem; }
+.member-card p { color: var(--primary); font-size: 0.95rem; font-weight: 600; }
+.member-card.small p, .member-card.team-card p { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+.member-card.small h3, .member-card.team-card h3 { font-size: 1rem; }
+
+/* --- Events Section (3D Tilt) --- */
+.events .card { cursor: pointer; }
+.event-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; perspective: 1000px; }
+.card { background-color: var(--white); padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; overflow: hidden; transform-style: preserve-3d; transition: transform 0.5s ease, box-shadow 0.5s ease; }
+.card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary), #00aaff); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+.card:hover::before { transform: scaleX(1); }
+
+.card-date { display: inline-block; background: var(--secondary); color: var(--primary); padding: 0.4rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem; margin-bottom: 1.5rem; transform: translateZ(20px); }
+.card h3 { color: var(--primary-dark); font-size: 1.5rem; margin-bottom: 1rem; transform: translateZ(30px); }
+.card p { color: var(--text-muted); margin-bottom: 1.5rem; transform: translateZ(10px); }
+.read-more { color: var(--primary); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px; transition: gap 0.3s ease; transform: translateZ(20px); }
+.card:hover .read-more { gap: 10px; }
+
+/* --- Modals Base Styles --- */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 34, 102, 0.8); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-content { background: var(--white); border-radius: 20px; padding: 2.5rem; display: flex; align-items: center; gap: 2rem; max-width: 650px; width: 90%; position: relative; transform: scale(0.7); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.modal-overlay.active .modal-content { transform: scale(1); }
+.modal-content img { width: 180px; height: 180px; border-radius: 15px; object-fit: cover; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.modal-info { flex: 1; }
+.modal-info h3 { color: var(--primary-dark); font-size: 1.8rem; margin-bottom: 0.2rem; }
+.modal-info h4 { color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; }
+.modal-info p { color: var(--text-muted); line-height: 1.6; }
+.close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: var(--text-muted); cursor: pointer; transition: color 0.3s ease; }
+.close-btn:hover { color: var(--primary-dark); }
+
+/* Event Specific Modal */
+.event-modal-content { max-width: 500px; padding: 3rem; flex-direction: column; }
+
+/* List Pop-up Modals (Achievements & Events) */
+.list-modal-content { max-width: 600px; flex-direction: column; padding: 3rem 2rem; }
+.modal-list { list-style: none; padding: 0; margin: 1.5rem 0 0 0; text-align: left; max-height: 50vh; overflow-y: auto; padding-right: 10px; }
+.modal-list::-webkit-scrollbar { width: 8px; }
+.modal-list::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
+.modal-list li { padding: 1.5rem 0; border-bottom: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 0.5rem; }
+.modal-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.modal-list h4 { color: var(--primary-dark); font-size: 1.2rem; margin: 0; }
+.modal-list p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin: 0; }
+.modal-list .date-badge { align-self: flex-start; background: var(--secondary); color: var(--primary); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; }
+
+/* --- Footer --- */
+.footer { background-color: var(--primary-dark); color: var(--white); text-align: center; padding: 5rem 0 2rem; }
+.footer h2 { font-size: 2rem; margin-bottom: 1rem; }
+.footer p { color: #a0aec0; margin-bottom: 2rem; }
+.social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 3rem; }
+.social-links a { color: var(--white); text-decoration: none; background: rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 50px; transition: all 0.3s ease; }
+.social-links a:hover { background: var(--primary); transform: translateY(-3px); }
+.copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; font-size: 0.9rem; }
+
+/* --- Perks Section --- */
+.perks-section { margin-top: 5rem; text-align: center; }
+.perks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; margin-top: 2rem; }
+.perk-card { background: var(--white); padding: 2rem; border-radius: 18px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; border: 2px solid transparent; }
+.perk-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0, 68, 204, 0.15); border-color: var(--primary); }
+.perk-icon { font-size: 3rem; margin-bottom: 1rem; }
+.perk-card h4 { color: var(--primary-dark); font-size: 1.2rem; margin-bottom: 0.8rem; }
+.perk-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+/* --- Event Card Actions --- */
+.card-actions { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; }
+.btn-attendance { display: inline-block; background: var(--primary); color: var(--white); padding: 0.6rem 1.5rem; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; border: none; transition: all 0.3s ease; }
+.btn-attendance:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+/* --- Account Modal --- */
+.account-modal-content { max-width: 450px; flex-direction: column; padding: 3rem 2rem; }
+.account-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-input { padding: 0.8rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: border-color 0.3s ease; }
+.form-input:focus { outline: none; border-color: var(--primary); }
+
+/* --- Attendance Modal --- */
+.attendance-modal-content { max-width: 500px; flex-direction: column; padding: 2.5rem; }
+.file-upload-area { border: 3px dashed var(--primary); border-radius: 12px; padding: 2rem; background: var(--secondary); cursor: pointer; transition: all 0.3s ease; }
+.file-upload-area:hover { background: rgba(0, 68, 204, 0.1); border-color: var(--primary-dark); }
+.file-label { cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.file-input { display: none; }
+.file-label p { margin: 0; }
+
+/* --- Scroll Reveal Animations --- */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .hamburger { display: block; }
+    .nav-menu { position: fixed; left: 100%; top: 0; flex-direction: column; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); width: 100%; height: 100vh; justify-content: center; transition: 0.4s ease; }
+    .nav-menu.active { left: 0; }
+    .navbar.logo-expanded #brand-logo { font-size: 1rem; }
+    .hero h1 { font-size: 2.8rem; }
+    .about-grid { grid-template-columns: 1fr; text-align: center; }
+    .about-stats { flex-direction: column; }
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
+
+@media (max-width: 600px) {
+    .modal-content { flex-direction: column; text-align: center; padding: 2.5rem 1.5rem; }
+    .list-modal-content { padding: 2rem 1.5rem; }
+    .modal-list { text-align: center; }
+    .modal-list .date-badge { align-self: center; }
+    .perks-grid { grid-template-columns: 1fr; }
+    .perk-card { padding: 1.5rem; }
+    .account-modal-content { padding: 2rem 1.5rem; }
+    .attendance-modal-content { padding: 2rem 1.5rem; }
+    .form-input { padding: 0.7rem 0.8rem; font-size: 0.95rem; }
+    .card-actions { flex-direction: row; gap: 0.5rem; }
+    .read-more, .btn-attendance { font-size: 0.8rem; padding: 0.5rem 1rem; }
+}
+/* --- Visual Edit Mode --- */
+body.edit-mode .editable {
+    outline: 2px dashed rgba(0, 170, 255, 0.5);
+    outline-offset: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    min-height: 20px;
+    min-width: 20px;
+}
+
+body.edit-mode .editable:hover {
+    background-color: rgba(0, 170, 255, 0.1);
+    cursor: text;
+    outline: 2px solid #00aaff;
+}
+
+body.edit-mode .editable-img {
+    outline: 3px dashed #ffaa00;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+body.edit-mode .editable-img:hover {
+    opacity: 0.8;
+}
+
+/* Floating Save Toolbar */
+.admin-toolbar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1e293b;
+    color: white;
+    padding: 1rem 2rem;
+    z-index: 10000;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+}
+
+.admin-toolbar.active {
+    display: flex;
+}
+/* --- Hidden Modal Text Editors --- */
+body.edit-mode .admin-hidden-desc {
+    display: block;
+    width: 100%;
+    background: rgba(0, 170, 255, 0.05);
+    color: inherit;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 2px dashed #00aaff;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+body.edit-mode .admin-hidden-desc::before {
+    content: 'Hidden Modal Description:';
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #00aaff;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* Hide them completely when not in edit mode */
+.admin-hidden-desc { 
+    display: none; 
+}
+
+/* --- BULLETPROOF BUTTON CSS --- */
+.btn-primary,
+.btn-attendance,
+.btn-secondary,
+.admin-add-btn,
+.admin-delete-btn,
+button {
+    position: relative !important;
+    z-index: 10000 !important; /* Force it above everything else */
+    pointer-events: auto !important; /* Ensure it accepts clicks */
+    cursor: pointer !important;
+}
+
+/* Ensure no transparent layers block clicks */
+.card, .perk-card, .achievement-card {
+    position: relative;
+    z-index: 1; /* Keep cards beneath the buttons */
+}
+/* 1. Ensure the Modal Overlay is the highest layer on the screen */
+.modal-overlay {
+    z-index: 100000 !important;
+}
+
+/* 2. Fix the 'See More' buttons so they stay in place on the main page */
+#btn-more-events, #btn-more-achievements {
+    position: relative !important;
+    z-index: 1 !important;
+    display: inline-block !important;
+    margin: 20px auto !important;
+}
+
+/* 3. Ensure the modal content is not being pushed by other elements */
+.event-modal-content {
+    z-index: 100001 !important;
+    position: relative !important;
+}
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background: white;
+    padding: 15px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 999999;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-left: 5px solid var(--primary);
+    min-width: 300px;
+}
+
+.custom-alert.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.custom-alert-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#custom-alert-message {
+    color: #1e293b;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Color variations */
+.custom-alert.success { border-left-color: #10b981; }
+.custom-alert.error { border-left-color: #ef4444; }
+/* Ensure all editable items are on top and clickable in Edit Mode */
+body.edit-mode .editable, 
+body.edit-mode .admin-hidden-desc,
+body.edit-mode .member-card h3,
+body.edit-mode .member-card p {
+    position: relative !important;
+    z-index: 10000 !important;
+    pointer-events: auto !important;
+    user-select: text !important;
+    cursor: text !important;
+}
+
+/* Force hidden descriptions to be visible and editable in the list modals */
+body.edit-mode .admin-hidden-desc {
+    display: block !important;
+    visibility: visible !important;
+    min-height: 40px;
+    background: rgba(0, 170, 255, 0.1) !important;
+    border: 2px dashed #00aaff !important;
+}
+
+/* Fix for Org Chart columns potentially blocking clicks */
+body.edit-mode .org-column, 
+body.edit-mode .member-card {
+    transform: none !important; /* Disable hover animations that might shift text away from cursor */
+}

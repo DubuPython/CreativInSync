@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "title": "Empowering <br><span class=\"highlight\">Student Leaders</span>",
+    "subtitle": "Join a community dedicated to excellence, innovation, and collaboration. Discover your potential with us.",
+    "logo": "https://uploads.onecompiler.io/44424aw4v/44mtk2qk6/CREATIV%20LOGO.png"
+  },
+  "counters": [
+    {"target":150},
+    {"target":20}
+  ],
+  "events": [
+    {"date":"Oct 15","title":"General Assembly","short":"Kick off the semester with our first general meeting.","full":"Full event description: Meet officers, free pizza."},
+    {"date":"Nov 02","title":"Leadership Workshop","short":"Enhance leadership skills with guest speakers.","full":"Full workshop description with schedules."},
+    {"date":"Dec 10","title":"End of Year Gala","short":"Celebrate the semester with music and awards.","full":"Formal attire required. Tickets available later."}
+  ],
+  "achievements": [
+    {"year":"2025","title":"Outstanding Org Award","desc":"Awarded by the CIT Department for excellence in student leadership.","img":"achievement1.jpg"},
+    {"year":"2024","title":"Best Tech Event","desc":"Recognized for hosting the campus-wide coding bootcamp.","img":"achievement2.jpg"}
+  ],
+  "team": [
+    {"name":"Ryzza Marie Lucas","role":"President","img":"https://uploads.onecompiler.io/44424aw4v/44mtk2qk6/EDU.jpg","desc":"Leads CREATIV with strategic direction."},
+    {"name":"Allysa Borlongan","role":"Executive Vice President","img":"https://uploads.onecompiler.io/44424aw4v/44mtk2qk6/EDU.jpg","desc":"Supports the president and oversees internal coordination."}
+  ],
+  "advisers": [
+    {"name":"Mr. John Carlo C. Ramos","role":"Adviser","img":"https://uploads.onecompiler.io/44424aw4v/44mtk2qk6/SIR%20JC.png","desc":"Provides mentorship and academic guidance."}
+  ],
+  "social": {
+    "facebook":"https://facebook.com/yourpage"
+  }
+}

@@ -1,0 +1,13 @@
+# Environments
+venv/
+env/
+
+# Sensitive Data
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Mac system files (if you use a Mac)
+.DS_Store
